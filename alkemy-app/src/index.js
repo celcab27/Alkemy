@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Button, Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Button, Navbar, Nav } from "react-bootstrap";
 import { useState } from "react";
-import { Form, FormControl, Col, Modal } from "react-bootstrap";
+import { Form, FormControl, Col, Modal, FormGroup } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -23,7 +23,6 @@ function App() {
         </Route>
       </Switch>
     </Router>
-
   );
 }
 
@@ -57,11 +56,9 @@ class MainBodyComponent extends React.Component {
   }
 }
 
-class ABMBodyComponent extends React.Component
-{
-  render()
-  {
-    return(
+class ABMBodyComponent extends React.Component {
+  render() {
+    return (
       <div>
         <NewOperationModal />
       </div>
@@ -82,36 +79,51 @@ function NewOperationModal() {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>¡Envíanos tu comentario!</Modal.Title>
+          <Modal.Title>Nueva Operación: </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Row>
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Nombre</Form.Label>
-                <Form.Control type="text" placeholder="Obligatorio" />
-              </Form.Group>
-
-              <Form.Group as={Col} controlId="formGridPassword">
-                <Form.Label>Apellido</Form.Label>
-                <Form.Control type="text" placeholder="Obligatorio" />
-              </Form.Group>
-            </Form.Row>
-
-            <Form.Group controlId="formGridAddress1">
-              <Form.Label>Mail</Form.Label>
-              <Form.Control type="email" placeholder="Obligatorio" />
-            </Form.Group>
-            <Form.Group controlId="exampleForm.ControlTextarea1">
-              <Form.Label>Ingrese aquí su comentario:</Form.Label>
-              <Form.Control as="textarea" rows={3} />
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>Título:</Form.Label>
+              <Form.Control type="text" />
+              <Form.Text className="text-muted">
+                Por favor, seleccione un nombre con el que desee visualizar la
+                operación.
+              </Form.Text>
             </Form.Group>
 
-            
+            <Form.Group>
+              <Form.Row>
+                <Col>
+                  <span>$</span>
+                </Col>
+                <Col>
+                  <Form.Control type="text" />
+                </Col>
+              </Form.Row>
+            </Form.Group>
 
-            
+            <FormGroup controlId="date" bsSize="large">
+              <Form.Label>Fecha:</Form.Label>
+              <FormControl type="date" />
+            </FormGroup>
+
+            <FormGroup>
+              <Form.Label>Categoría:</Form.Label>
+              <Form.Control as="select">
+                <option>Default select</option>
+              </Form.Control>
+            </FormGroup>
+
+            <FormGroup>
+              <Form.Label>Tipo de Operación:</Form.Label>
+              <Form.Control as="select">
+                <option>Default select</option>
+              </Form.Control>
+            </FormGroup>
           </Form>
         </Modal.Body>
+
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
