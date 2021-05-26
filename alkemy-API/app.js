@@ -1,13 +1,24 @@
 const express = require('express');
 const cors = require('cors');
+const app = express();
+const routes = require('./src/routes');
 
+
+//Settings
 const PORT = 5000;
 
-const app = express();
+
+
+//Middlewares
 app.use(cors());     //encargara de manejar errores de cors, hay muchas alternativas a este
 app.use(express.json());  //Se encarga de parsear el body de las request, si no lo ponemos no podemos leerlo
-//app.use('/', routes);
-//app.use('/public/upload', express.static(__dirname + '/public/upload'));
+app.use('/', routes);
+
+
+//Routes
+
+//Starting the server
+
 
 try {   //try-catch para manejar errores en caso de tenerlo cuando levantamos el servidor
     app.listen(PORT, () => {    //Escuchamos al puesto PORT
