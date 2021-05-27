@@ -139,6 +139,20 @@ function NewOperationModal() {
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
+if(window.location == "http://localhost:3000/ABM")
+{
+  let xhr = new XMLHttpRequest();
+  let url = 'http://localhost:5000/api/usuarios/krezz';
+  xhr.open('GET', url, true);
+  xhr.onreadystatechange = function() {
+    if(this.readyState == 4 && this.status == 200 )
+    {
+      var usuarios = JSON.parse(this.responseText);
+      console.log(usuarios);
+    }
+  }
+  xhr.send();
+}
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
