@@ -1,11 +1,11 @@
 const routes = require('express').Router();
 const { getUsuarios, getUsuario } = require('./controllers/usuarios');
-const {getAllIncome, createIncome} = require('./controllers/ingresos');
+const {getAllOperations, createOperation} = require('./controllers/operaciones');
 
 routes.get('/api/usuarios', getUsuarios);
 routes.get('/api/usuarios/:user', getUsuario);
 
-routes.get('/api/ingresos', getAllIncome);
-routes.post('/api/crear-ingreso', createIncome)
+routes.get('/api/operaciones', getAllOperations);
+routes.post('/api/crear-operacion', createOperation);
 
 module.exports = routes;

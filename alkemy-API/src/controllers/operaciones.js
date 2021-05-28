@@ -2,9 +2,9 @@ const { json } = require('express');
 const mySQLConnection = require('../database');
 
 module.exports = {
-    async getAllIncome(req, res)
+    async getAllOperations(req, res)
     {
-        mySQLConnection.query('SELECT * FROM operaciones WHERE type_ = "Ingreso"', (err, rows, fields) =>
+        mySQLConnection.query('SELECT * FROM operaciones', (err, rows, fields) =>
         {
             if(!err)
             {
@@ -17,11 +17,11 @@ module.exports = {
         }
         );
     },
-    async createIncome(req, res)
+    async createOperation(req, res)
     {
-        const {user_id, category, type, title, amount } = req.body;
+        const {user_id, category, type, title, amount, date } = req.body;
 
-        mySQLConnection.query('INSERT INTO operaciones (user_id_, category_, type_, title_, amount_) VALUES(?, ?, ?, ?, ?)', [user_id, category, type, title, amount], (err, rows, fields) =>
+        mySQLConnection.query('INSERT INTO operaciones (user_id_, category_, type_, title_, amount_, date_) VALUES(?, ?, ?, ?, ?, ?)', [user_id, category, type, title, amount, date], (err, rows, fields) =>
         {
             if(!err)
             {
