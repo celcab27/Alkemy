@@ -27,9 +27,21 @@ class OperacionesComponent extends React.Component {
               operationsBalance.push(operaciones[i]);
             }
           }
-          console.log(operationsBalance);
           this.setState({operaciones: operationsBalance})
       }
+      var balance = 0;
+      for(let operacion of this.state.operaciones)
+      {
+        if(operacion.type_ == "Ingreso")
+        {
+          balance += operacion.amount_;
+        }
+        else
+        {
+          balance = balance - operacion.amount_;
+        }
+      }
+      localStorage.setItem("balance", balance);
       });
   }
 
@@ -38,6 +50,8 @@ class OperacionesComponent extends React.Component {
       var operations = this.state.operaciones.map((operacion) => {
         //Sql lo trae como fecha y hora así que tengo que cortar el string antes de mostrarlos
         var operationDate = operacion.date_.substring(0, 10);
+
+        console.log(localStorage.getItem('balance'));
         return (
           <Card bg="secondary" text="white" className="card">
             <Card.Header>{operacion.title_}</Card.Header>

@@ -7,6 +7,7 @@ import { useState, render } from "react";
 import { Form, FormControl, Col, Modal, FormGroup } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import OperacionesComponent from "./components/operaciones";
+import BalanceComponent from './components/balance';
 
 function App() {
   return (
@@ -50,7 +51,9 @@ class MainBodyComponent extends React.Component {
   render() {
     return (
       <div id="divMain">
-        <div className="container"id="balance">Hola</div>
+        <div className="container"id="balance">
+         <BalanceComponent></BalanceComponent> 
+         </div>
         <div className="container" id="registrosMain">
           <OperacionesComponent></OperacionesComponent>
         </div>
