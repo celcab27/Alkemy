@@ -4,7 +4,7 @@ const mySQLConnection = require('../database');
 module.exports = {
     async getAllOperations(req, res)
     {
-        mySQLConnection.query('SELECT * FROM operaciones', (err, rows, fields) =>
+        mySQLConnection.query('SELECT * FROM operaciones ', (err, rows, fields) =>
         {
             if(!err)
             {

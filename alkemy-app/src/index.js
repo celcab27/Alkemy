@@ -18,7 +18,7 @@ function App() {
         </Route>
       </Switch>
       <Switch>
-        <Route path="/" exact>
+        <Route path="/home" exact>
           <NavbarComponent> </NavbarComponent>
           <MainBodyComponent> </MainBodyComponent>
         </Route>
@@ -31,11 +31,11 @@ class NavbarComponent extends React.Component {
   render() {
     return (
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">Alkemy Challenge</Navbar.Brand>
+        <Navbar.Brand href="/home">Alkemy Challenge</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="/home">Home</Nav.Link>
             <Link className="nav-link" to="/ABM">
               ABM
             </Link>
@@ -50,8 +50,10 @@ class MainBodyComponent extends React.Component {
   render() {
     return (
       <div id="divMain">
-        <div>Hola</div>
-        <div id="registrosMain">Mundo</div>
+        <div className="container"id="balance">Hola</div>
+        <div className="container" id="registrosMain">
+          <OperacionesComponent></OperacionesComponent>
+        </div>
       </div>
     );
   }
@@ -60,7 +62,7 @@ class MainBodyComponent extends React.Component {
 class ABMBodyComponent extends React.Component {
   render() {
     return (
-      <div>
+      <div className="container" id="abmBody">
         <NewOperationComponent></NewOperationComponent>
         <OperacionesComponent></OperacionesComponent>
       </div>
@@ -117,7 +119,8 @@ class NewOperationComponent extends React.Component {
         <Button
           variant="secondary"
           size="lg"
-          onClick={() => this.handleModal()}>
+          onClick={() => this.handleModal()}
+          id="newOperationButton">
           Nueva Operación
         </Button>
         <Modal show= {this.state.showModal}>
@@ -192,16 +195,7 @@ ReactDOM.render(<App />, document.getElementById("root"));
 
 
 if (window.location == "http://localhost:3000/ABM") {
-  let xhr = new XMLHttpRequest();
-  let url = "http://localhost:5000/api/usuarios/krezz";
-  xhr.open("GET", url, true);
-  xhr.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      // var usuarios = JSON.parse(this.responseText);
-      // console.log(usuarios);
-    }
-  };
-  xhr.send();
+
 }
 
 async function postData(url, data) {
