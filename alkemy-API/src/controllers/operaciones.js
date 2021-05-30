@@ -25,7 +25,25 @@ module.exports = {
         {
             if(!err)
             {
-                res.json({Status: "Income succesfully saved"});
+                res.json({Status: "Operation succesfully saved"});
+            }
+            else
+            {
+                console.log(err);
+            }
+        });
+    },
+    async updateOperation(req, res)
+    {
+        const { category, title, amount, date, id } = req.body;
+
+        console.log(title);
+        console.log(req.body);
+        mySQLConnection.query("UPDATE operaciones SET title_= ?, amount_ = ?, category_ = ?, date_ = ?   WHERE id_= ?", [title, amount, category, date, id], (err, rows, fields) =>
+        {
+            if(!err)
+            {
+                res.json({Status: "Operation succesfully saved"});
             }
             else
             {

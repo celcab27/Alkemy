@@ -1,6 +1,8 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, Button } from "react-bootstrap";
+import EditarComponent from './editar';
+
 
 class OperacionesComponent extends React.Component {
   constructor(props) {
@@ -10,11 +12,14 @@ class OperacionesComponent extends React.Component {
 
   
   componentWillMount() {
+    //Dejar localstorage el balance en 0 así solo se guarda el valor si es que carga
+    localStorage.setItem('balance', 0);
     fetch("http://localhost:5000/api/operaciones")
       .then((response) => {
         return response.json();
       })
       .then((operaciones) => {
+        operaciones = operaciones.reverse();
         if (window.location.href == "http://localhost:3000/ABM") {
           this.setState({ operaciones: operaciones });
         } else if (window.location.href == "http://localhost:3000/home") {
@@ -45,16 +50,22 @@ class OperacionesComponent extends React.Component {
       });
   }
 
+
   render() {
+    var operations = [];
+  
+    
     if (this.state.operaciones.length > 0) {
-      var operations = this.state.operaciones.map((operacion) => {
+       operations = this.state.operaciones.map((operacion) => {
         //Sql lo trae como fecha y hora así que tengo que cortar el string antes de mostrarlos
         var operationDate = operacion.date_.substring(0, 10);
 
         console.log(localStorage.getItem('balance'));
         return (
-          <Card bg="secondary" text="white" className="card">
-            <Card.Header>{operacion.title_}</Card.Header>
+          <Card bg="dark" text="white" className="card">
+            <Card.Header >
+              <h4> {operacion.title_} </h4>
+              </Card.Header >
             <Card.Body>
               <Card.Title>
                 Monto: ${operacion.amount_} ({operacion.type_})
@@ -63,7 +74,15 @@ class OperacionesComponent extends React.Component {
                 Fecha: {operationDate} <br />
                 Categoría: {operacion.category_}
               </Card.Text>
-              <Button variant="dark">Go somewhere</Button>
+              {/* <Button variant="outline-light">Editar</Button> */}
+              <EditarComponent 
+              title = {operacion.title_}
+              amount = {operacion.amount_}
+              date = {operacion.date_}
+              category = {operacion.category_}
+              type = {operacion.type_}
+              id = {operacion.id_}
+              ></EditarComponent>
             </Card.Body>
           </Card>
         );

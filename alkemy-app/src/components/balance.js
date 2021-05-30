@@ -1,6 +1,6 @@
-import OperacionesComponent from "./operaciones";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 
 class BalanceComponent extends React.Component {
 
@@ -15,7 +15,7 @@ class BalanceComponent extends React.Component {
   }
   render() {
     return(
-      <div>
+      <div id="balanceComponent">
         <h1>Balance:</h1>
         <h3>${this.balance}</h3>
       </div>
